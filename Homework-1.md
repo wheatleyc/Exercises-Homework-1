@@ -144,7 +144,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn2 = knnreg(price ~ mileage, data=sclass_350_train, k=2)
     rmse(knn2, sclass_350_test)
 
-    ## [1] 10589.35
+    ## [1] 12078.09
 
     rmse_out2 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -161,7 +161,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn5 = knnreg(price ~ mileage, data=sclass_350_train, k=5)
     rmse(knn5, sclass_350_test)
 
-    ## [1] 9919.813
+    ## [1] 11211.82
 
     rmse_out5 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -175,7 +175,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn10 = knnreg(price ~ mileage, data=sclass_350_train, k=10)
     rmse(knn10, sclass_350_test)
 
-    ## [1] 10668.76
+    ## [1] 10883.58
 
     rmse_out10 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -189,7 +189,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn20 = knnreg(price ~ mileage, data=sclass_350_train, k=20)
     rmse(knn20, sclass_350_test)
 
-    ## [1] 9596.038
+    ## [1] 10133.47
 
     rmse_out20 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -203,7 +203,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn25 = knnreg(price ~ mileage, data=sclass_350_train, k=25)
     rmse(knn25, sclass_350_test)
 
-    ## [1] 10655.89
+    ## [1] 9859.405
 
     rmse_out25 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -217,7 +217,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn30 = knnreg(price ~ mileage, data=sclass_350_train, k=30)
     rmse(knn30, sclass_350_test)
 
-    ## [1] 9941.631
+    ## [1] 7081.832
 
     rmse_out30 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -231,7 +231,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn35 = knnreg(price ~ mileage, data=sclass_350_train, k=35)
     rmse(knn35, sclass_350_test)
 
-    ## [1] 11455.33
+    ## [1] 11214.01
 
     rmse_out35 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -245,7 +245,7 @@ week, the total number of filghts appears to decrease until Sunday.
     knn40 = knnreg(price ~ mileage, data=sclass_350_train, k=40)
     rmse(knn40, sclass_350_test)
 
-    ## [1] 11128.37
+    ## [1] 10942.84
 
     rmse_out40 = foreach(i=1:10, combine('c')) %do% {
       sclass_350_split = initial_split(sclass_350, prop=0.8)
@@ -284,15 +284,15 @@ week, the total number of filghts appears to decrease until Sunday.
 
     rmse_cv
 
-    ## [1] 11897.750  8846.109 10322.561 11444.536  8867.596
+    ## [1] 11700.652 10217.686 10536.622  9642.392  9577.065
 
     mean(rmse_cv)
 
-    ## [1] 10275.71
+    ## [1] 10334.88
 
     sd(rmse_cv)/sqrt(K_folds)
 
-    ## [1] 633.4787
+    ## [1] 385.59
 
     sclass350_folds = crossv_kfold(sclass_350, k=K_folds)
     models = map(sclass350_folds$train, ~ knnreg(price ~ mileage, k=35, data = ., use.all=FALSE))
@@ -301,11 +301,11 @@ week, the total number of filghts appears to decrease until Sunday.
 
     mean(errs)
 
-    ## [1] 10145.97
+    ## [1] 10144.79
 
     sd(errs)/sqrt(K_folds)
 
-    ## [1] 550.7055
+    ## [1] 595.7948
 
     k_grid = c(2, 4, 6, 8, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300)
 
@@ -320,12 +320,12 @@ week, the total number of filghts appears to decrease until Sunday.
     head(cv_grid)
 
     ##           k       err  std_err
-    ## result.1  2 11678.970 663.5209
-    ## result.2  4 10640.300 633.2268
-    ## result.3  6 10300.989 705.3514
-    ## result.4  8 10131.712 616.2927
-    ## result.5 10 10004.738 556.3181
-    ## result.6 15  9895.636 472.3875
+    ## result.1  2 12221.724 391.4196
+    ## result.2  4 10738.324 525.7934
+    ## result.3  6 10364.838 520.3630
+    ## result.4  8 10343.269 491.6100
+    ## result.5 10 10144.223 575.1083
+    ## result.6 15  9798.807 557.7442
 
     ggplot(cv_grid) + geom_point(aes(x=k, y=err)) + geom_errorbar(aes(x=k, ymin = err-std_err, ymax = err+std_err)) + scale_x_log10()
 
@@ -338,15 +338,15 @@ Plot the fitted model of price (k=35) vs. x
     p_test = ggplot(data = sclass_350_test) + geom_point(mapping = aes(x=mileage, y=price), alpha = 0.2) + ylim(7000, 20000)
     p_test
 
-    ## Warning: Removed 64 rows containing missing values (geom_point).
+    ## Warning: Removed 61 rows containing missing values (geom_point).
 
 ![](Homework-1_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
     p_test + geom_line(aes(x=mileage, y=price_pred), color='green', size=1.5)
 
-    ## Warning: Removed 64 rows containing missing values (geom_point).
+    ## Warning: Removed 61 rows containing missing values (geom_point).
 
-    ## Warning: Removed 75 row(s) containing missing values (geom_path).
+    ## Warning: Removed 70 row(s) containing missing values (geom_path).
 
 ![](Homework-1_files/figure-markdown_strict/unnamed-chunk-11-2.png)
 
@@ -359,7 +359,7 @@ Plot the fitted model of price (k=35) vs. x
     knn2 = knnreg(price ~ mileage, data=sclass_65AMG_train, k=2)
     rmse(knn2, sclass_65AMG_test)
 
-    ## [1] 13555.61
+    ## [1] 12058.83
 
     rmse_out2 = foreach(i=1:10, combine('c')) %do% {
       sclass_65AMG_split = initial_split(sclass_65AMG, prop=0.8)
@@ -373,7 +373,7 @@ Plot the fitted model of price (k=35) vs. x
     knn15 = knnreg(price ~ mileage, data=sclass_65AMG_train, k=15)
     rmse(knn15, sclass_65AMG_test)
 
-    ## [1] 15605.53
+    ## [1] 15912.34
 
     rmse_out15 = foreach(i=1:10, combine('c')) %do% {
       sclass_65AMG_split = initial_split(sclass_65AMG, prop=0.8)
@@ -387,7 +387,7 @@ Plot the fitted model of price (k=35) vs. x
     knn25 = knnreg(price ~ mileage, data=sclass_65AMG_train, k=25)
     rmse(knn25, sclass_65AMG_test)
 
-    ## [1] 28380.77
+    ## [1] 30260.06
 
     rmse_out25 = foreach(i=1:10, combine('c')) %do% {
       sclass_65AMG_split = initial_split(sclass_65AMG, prop=0.8)
@@ -424,15 +424,15 @@ Plot the fitted model of price (k=35) vs. x
 
     rmse_cvv
 
-    ## [1] 11296.859  8726.312 10038.025 10961.310  8867.596
+    ## [1] 11326.109  9413.728  9979.897  9421.021  9577.065
 
     mean(rmse_cvv)
 
-    ## [1] 9978.02
+    ## [1] 9943.564
 
     sd(rmse_cvv)/sqrt(K_folds)
 
-    ## [1] 524.8624
+    ## [1] 360.614
 
     sclass65AMG_folds = crossv_kfold(sclass_65AMG, k=K_folds)
     models = map(sclass65AMG_folds$train, ~ knnreg(price ~ mileage, k=15, data = ., use.all=FALSE))
@@ -441,11 +441,11 @@ Plot the fitted model of price (k=35) vs. x
 
     mean(errs)
 
-    ## [1] 20758.88
+    ## [1] 20881.89
 
     sd(errs)/sqrt(K_folds)
 
-    ## [1] 2117.029
+    ## [1] 1832.486
 
     k_grid = c(2, 4, 6, 8, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 125, 150, 175, 200, 250, 300)
 
@@ -455,45 +455,45 @@ Plot the fitted model of price (k=35) vs. x
       c(k=k, err = mean(errs), std_err = sd(errs)/sqrt(K_folds))
     } %>% as.data.frame
 
-    ## Warning in knnregTrain(train = structure(c(106, 11, 73415, 17335, 7, 61500, : k
+    ## Warning in knnregTrain(train = structure(c(106, 74461, 17335, 7, 61500, : k =
+    ## 250 exceeds number 233 of patterns
+
+    ## Warning in knnregTrain(train = structure(c(106, 11, 73415, 17335, 7, 48398, : k
     ## = 250 exceeds number 233 of patterns
 
     ## Warning in knnregTrain(train = structure(c(106, 11, 74461, 73415, 17335, : k =
-    ## 250 exceeds number 233 of patterns
+    ## 250 exceeds number 234 of patterns
 
-    ## Warning in knnregTrain(train = structure(c(106, 74461, 73415, 17335, 48398, : k
+    ## Warning in knnregTrain(train = structure(c(106, 11, 74461, 73415, 7, 48398, : k
     ## = 250 exceeds number 234 of patterns
 
-    ## Warning in knnregTrain(train = structure(c(11, 74461, 73415, 7, 48398, 49515, :
+    ## Warning in knnregTrain(train = structure(c(11, 74461, 73415, 17335, 7, 48398, :
     ## k = 250 exceeds number 234 of patterns
 
-    ## Warning in knnregTrain(train = structure(c(106, 11, 74461, 17335, 7, 48398, : k
-    ## = 250 exceeds number 234 of patterns
+    ## Warning in knnregTrain(train = structure(c(106, 74461, 17335, 7, 61500, : k =
+    ## 300 exceeds number 233 of patterns
 
-    ## Warning in knnregTrain(train = structure(c(106, 11, 73415, 17335, 7, 61500, : k
+    ## Warning in knnregTrain(train = structure(c(106, 11, 73415, 17335, 7, 48398, : k
     ## = 300 exceeds number 233 of patterns
 
     ## Warning in knnregTrain(train = structure(c(106, 11, 74461, 73415, 17335, : k =
-    ## 300 exceeds number 233 of patterns
+    ## 300 exceeds number 234 of patterns
 
-    ## Warning in knnregTrain(train = structure(c(106, 74461, 73415, 17335, 48398, : k
+    ## Warning in knnregTrain(train = structure(c(106, 11, 74461, 73415, 7, 48398, : k
     ## = 300 exceeds number 234 of patterns
 
-    ## Warning in knnregTrain(train = structure(c(11, 74461, 73415, 7, 48398, 49515, :
+    ## Warning in knnregTrain(train = structure(c(11, 74461, 73415, 17335, 7, 48398, :
     ## k = 300 exceeds number 234 of patterns
-
-    ## Warning in knnregTrain(train = structure(c(106, 11, 74461, 17335, 7, 48398, : k
-    ## = 300 exceeds number 234 of patterns
 
     head(cv_grid)
 
     ##           k      err  std_err
-    ## result.1  2 24029.76 1495.585
-    ## result.2  4 21820.49 1729.809
-    ## result.3  6 21476.65 1925.811
-    ## result.4  8 20905.12 1867.080
-    ## result.5 10 20741.29 1879.094
-    ## result.6 15 20758.88 2117.029
+    ## result.1  2 25501.45 1554.018
+    ## result.2  4 21577.27 1093.890
+    ## result.3  6 21711.51 1361.151
+    ## result.4  8 20806.71 1752.211
+    ## result.5 10 20792.03 1761.495
+    ## result.6 15 20881.89 1832.486
 
     ggplot(cv_grid) + geom_point(aes(x=k, y=err)) + geom_errorbar(aes(x=k, ymin = err-std_err, ymax = err+std_err)) + scale_x_log10()
 
@@ -502,7 +502,7 @@ Plot the fitted model of price (k=35) vs. x
     knn13 = knnreg(price ~ mileage, data=sclass_65AMG_train, k=13)
     rmse(knn13, sclass_65AMG_test)
 
-    ## [1] 15010.27
+    ## [1] 24088.21
 
     sclass_65AMG_test = sclass_65AMG_test %>%
       mutate(price_pred = predict(knn13, sclass_65AMG_test))
@@ -510,13 +510,13 @@ Plot the fitted model of price (k=35) vs. x
     p_test = ggplot(data = sclass_65AMG_test) + geom_point(mapping = aes(x=mileage, y=price), alpha = 0.8) + ylim(7000, 20000)
     p_test
 
-    ## Warning: Removed 59 rows containing missing values (geom_point).
+    ## Warning: Removed 58 rows containing missing values (geom_point).
 
 ![](Homework-1_files/figure-markdown_strict/unnamed-chunk-12-2.png)
 
     p_test + geom_line(aes(x=mileage, y=price_pred), color='green', size=1.5)
 
-    ## Warning: Removed 59 rows containing missing values (geom_point).
+    ## Warning: Removed 58 rows containing missing values (geom_point).
 
     ## Warning: Removed 59 row(s) containing missing values (geom_path).
 
